@@ -13,9 +13,9 @@ Q_beta = 7e-4
 Q_k = 8.3e17
 
 # salinity balance - the total moles of salt added or removed to the surface boxes
-Fw = 0.25  # high latitude evaporation minus precipitation in units of m yr-1
-Sref = 35  # reference salinity in units of PSU (unitless)
-E = SA_ocean * fSA_hilat * Fw * Sref  # amount of salt removed from the high latitude box, PSU m3 yr-1
+Fw = 0.1  # low latitude evaporation - precipitation in units of m yr-1
+Sref = 35  # reference salinity in units of g kg-1
+E = Fw * SA_ocean * (1 - fSA_hilat) * Sref  # amount of salt removed from the low latitude box,  g kg-1 yr-1, ~ kg m-3 yr-1
 
 def ocean_model_TS(lolat, hilat, deep, tmax, dt):
     """Run the ocean model for a given time period and return the results for each box.
