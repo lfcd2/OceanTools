@@ -266,10 +266,10 @@ def ocean_model_bio(lolat, hilat, deep, atmos, tmax, dt):
             fluxes[f'dCO2_{boxname}'] = box['V'] / box['tau_CO2'] * (box['CO2'][last] - 1e-3 * atmos['pCO2'][last] * box['K0'][last]) * dt  # mol dt-1
             # organic matter production
             fluxes[f'export_PO4_{boxname}'] = box['PO4'][last] * box['V'] / box['tau_PO4'] * dt  # mol PO4 dt-1
-            # DIC export by productivity :                                       redfield + calcification
+            # DIC export by productivity :                                  redfield + calcification
             fluxes[f'export_DIC_{boxname}'] = fluxes[f'export_PO4_{boxname}'] * (106 + 106 * box['f_CaCO3'])  # mol DIC dt-1
-            # TA export by productivity :                                       calcification
-            fluxes[f'export_TA_{boxname}'] = fluxes[f'export_PO4_{boxname}'] * (2 * 106 * box['f_CaCO3'])  # mol TA dt-1
+            # TA export by productivity :                                  redfield + calcification
+            fluxes[f'export_TA_{boxname}'] = fluxes[f'export_PO4_{boxname}'] * (-18 + 2 * 106 * box['f_CaCO3'])  # mol TA dt-1
             
         fluxes['dCO2_emissions'] = atmos['GtC_emissions'][last] * 1e15 / 12 * dt  # mol dt-1
 
